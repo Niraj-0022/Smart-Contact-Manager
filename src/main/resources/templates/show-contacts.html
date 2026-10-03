@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base1 :: layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Contacts</title>
+</head>
+
+<body>
+
+<section>
+
+    <div class="card mr-3 ml-3 mt-5">
+
+        <div class="card-body">
+
+            <h1 class="text-center">Your Contacts</h1>
+
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="c : ${contacts}">
+
+                        <th scope="row" th:text="${'SCMUSER' + c.cId}">1</th>
+
+                        <td>
+                            <!-- FIXED: Image source -->
+                            <img class="my_profile_picture"
+                                 th:src="@{|/img/${c.image}|}"
+                                 alt="profile photo">
+
+                            <span th:text="${c.name}"></span>
+                        </td>
+
+                        <td>
+                            <!-- FIXED: Link to contact details -->
+                            <a th:href="@{|/user/${c.cId}/contact|}">
+                                <span th:text="${c.email}"></span>
+                            </a>
+                        </td>
+
+                        <td th:text="${c.phone}">Phone</td>
+
+                        <td>
+                            <!-- If you want this to use your SweetAlert delete, it should call the JS function -->
+                            <a href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                            <!-- FIXED: Update form action -->
+                            <form th:action="@{|/user/update-contact/${c.cId}|}" method="get" class="mt-2">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Update
+                                </button>
+                            </form>
+                        </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <!-- Pagination -->
+            <!-- FIXED: Added check so it doesn't crash if totalPages is 0 -->
+            <nav aria-label="Page navigation" th:if="${totalPages > 0}">
+
+                <ul class="pagination">
+
+                    <!-- Previous -->
+                    <li th:if="${currentPage > 0}" class="page-item">
+                        <!-- FIXED: URL Math inside |...| -->
+                        <a class="page-link" th:href="@{|/user/show-contacts/${currentPage - 1}|}">
+                            Previous
+                        </a>
+                    </li>
+
+                    <!-- Page Numbers -->
+                    <li th:each="i : ${#numbers.sequence(1, totalPages)}" 
+                        th:classappend="${currentPage == i - 1 ? 'active' : ''}" 
+                        class="page-item">
+                        
+                        <!-- FIXED: URL Math inside |...| -->
+                        <a class="page-link" 
+                           th:href="@{|/user/show-contacts/${i - 1}|}" 
+                           th:text="${i}">
+                            1
+                        </a>
+                    </li>
+
+                    <!-- Next -->
+                    <li th:if="${currentPage + 1 < totalPages}" class="page-item">
+                        <!-- FIXED: URL Math inside |...| -->
+                        <a class="page-link" th:href="@{|/user/show-contacts/${currentPage + 1}|}">
+                            Next
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

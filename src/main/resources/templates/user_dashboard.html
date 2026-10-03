@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base1 :: layout(~{::section})}">
+
+<body>
+<section>
+    <div class="container mt-4">
+        <h2>User Dashboard</h2>
+        <p>Welcome, 
+            <strong th:text="${user != null ? user.name : 'User'}">User</strong>
+        </p>
+    </div>
+</section>
+	<section>
+		<div class="container">
+			<div class ="card">
+				<div class="card-body">
+					<div class="container text-center">
+						<img src=""
+     style="height: 200px; width: 200px;"
+     class="my_profile_picture"
+     th:src="@{'/img/contact.jpeg'}"
+     alt="Profile Picture">
+					</div>
+					
+					<h1 class="text-center mt-3 text-secondary font-italic font-weight-light">Start Adding your contact on Cloud...</h1>
+					
+					<a href="@{/user/add-contact}" class="btn btn-primary btn-block text-uppercase">Add New Contact</a>
+					<hr />
+					
+					<h3 class="my-3">Donate Us</h3>
+					<input type="text" id="payment_field" class="form-control my-2" placeholder="Enter amount here" />
+					
+					<div class="container text-center mt-3">
+					    <button onclick="paymentStart()" class="btn btn-success btn-block">Checkout</button>
+					</div>
+					
+					</div>
+				</div>
+			</div>
+	</section>
+	<a id="home-link" href="#" th:href="@{/user/index}" class="item active">
+    <i class="..."></i>
+	</a>
+
+		<a id="contacts-link" href="#" th:href="@{/user/show-contacts/0}" class="item">
+		    <i class="..."></i>
+		</a>
+		
+		<a id="add-link" href="#" th:href="@{/user/add-contact}" class="item">
+		    <i class="..."></i>
+		</a>
+		
+		<a id="profile-link" href="#" th:href="@{/user/profile}" class="item">
+		    <i class="..."></i>
+		</a>
+		
+		<a id="settings-link" href="#" th:href="@{/user/settings}" class="item">
+		    <i class="..."></i>
+		</a>
+		
+		<a href="#" th:href="@{/logout}" class="item">
+		    <i class="fas fa-sign-out-alt"></i>
+		</a>
+		
+		<div class="divider"></div>
+</body>
+
+
+</html>

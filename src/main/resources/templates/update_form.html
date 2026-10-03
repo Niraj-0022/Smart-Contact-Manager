@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base1 :: layout(~{::section})}">
+<body>
+
+<section>
+<div class="card">
+  <div class="card-body">
+
+    <h1 class="text-center">Update Your Contact</h1>
+
+    <form th:action="@{/user/process-update}"
+          th:object="${contact}"
+          method="post"
+          enctype="multipart/form-data">
+
+      <!-- IMPORTANT: Contact ID -->
+      <input type="hidden" th:field="*{cId}">
+
+      <!-- Name -->
+      <div class="input-group mt-3">
+        <div class="input-group-text">
+          <i class="fa fa-user"></i>
+        </div>
+        <input type="text" th:field="*{name}"
+               class="form-control"
+               placeholder="Enter name" required minlength="2">
+      </div>
+
+      <!-- Second Name -->
+      <div class="input-group mt-3">
+        <div class="input-group-text">
+          <i class="fas fa-user-alt"></i>
+        </div>
+        <input type="text" th:field="*{secondName}"
+               class="form-control"
+               placeholder="Enter second name" required>
+      </div>
+
+      <!-- Phone -->
+      <div class="input-group mt-3">
+        <div class="input-group-text">
+          <i class="fa fa-phone"></i>
+        </div>
+        <input type="tel" th:field="*{phone}"
+               class="form-control"
+               placeholder="Enter phone"
+               pattern="[0-9]{10}" required>
+      </div>
+
+      <!-- Email -->
+      <div class="input-group mt-3">
+        <div class="input-group-text">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <input type="email" th:field="*{email}"
+               class="form-control"
+               placeholder="Enter email" required>
+      </div>
+
+      <!-- Work -->
+      <div class="input-group mt-3">
+        <div class="input-group-text">
+          <i class="fa fa-briefcase"></i>
+        </div>
+        <input type="text" th:field="*{work}"
+               class="form-control"
+               placeholder="Enter work" required>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group mt-3">
+        <textarea th:field="*{description}"
+                  id="mytextarea"
+                  class="form-control"
+                  rows="5"
+                  required minlength="10">
+        </textarea>
+      </div>
+
+      <!-- Current Image -->
+      <div class="container text-center mt-3">
+        <img th:src="@{'/img/' + ${contact.image}}"
+             class="img-fluid"
+             style="width:250px;height:250px"
+             alt="profile image">
+      </div>
+
+      <!-- Image Upload -->
+      <div class="form-group mt-3">
+        <label>Choose new profile image</label>
+        <input type="file" name="profileImage" class="form-control">
+      </div>
+
+      <!-- Submit -->
+      <div class="container text-center mt-3">
+        <button type="submit" class="btn btn-outline-primary">
+          Save Contact
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- TinyMCE -->
+
+</section>
+</body>
+</html>

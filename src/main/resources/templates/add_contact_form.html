@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base1 :: layout(~{::section})}">
+
+<head>
+<meta charset="UTF-8">
+<title>Add Contact</title>
+</head>
+
+<body>
+<section>
+
+  <div class="card">
+    <div class="card-body">
+
+      <h1 class="text-center">Add Contact</h1>
+
+      <div class="container-fluid mt-3">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+
+            <!-- FORM START -->
+            <form th:action="@{/user/contact1}"
+                  method="post"
+                  enctype="multipart/form-data">
+
+              <!-- First Name -->
+              <div class="input-group mt-3">
+                <div class="input-group-text">
+                  <i class="fa fa-user"></i>
+                </div>
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       placeholder="Enter name"
+                       required
+                       minlength="2">
+              </div>
+
+              <!-- Second Name -->
+              <div class="input-group mt-3">
+                <div class="input-group-text">
+                  <i class="fas fa-user-alt"></i>
+                </div>
+                <input type="text"
+                       name="secondName"
+                       class="form-control"
+                       placeholder="Enter second name"
+                       required>
+              </div>
+
+              <!-- Phone -->
+              <div class="input-group mt-3">
+                <div class="input-group-text">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <input type="tel"
+                       name="phone"
+                       class="form-control"
+                       placeholder="Enter phone number"
+                       required
+                       pattern="[0-9]{10}"
+                       title="Enter 10 digit phone number">
+              </div>
+
+              <!-- Email -->
+              <div class="input-group mt-3">
+                <div class="input-group-text">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       placeholder="Enter email"
+                       required>
+              </div>
+
+              <!-- Work -->
+              <div class="input-group mt-3">
+                <div class="input-group-text">
+                  <i class="fa fa-briefcase"></i>
+                </div>
+                <input type="text"
+                       name="work"
+                       class="form-control"
+                       placeholder="Enter work"
+                       required>
+              </div>
+
+              <!-- Description 
+              <div class="form-group mt-3">
+                <textarea name="description"
+                          id="mytextarea"
+                          class="form-control"
+                          rows="5"
+                          placeholder="Enter description"
+                          required
+                          minlength="10"></textarea>
+              </div> -->
+
+              <!-- Image Upload -->
+              <div class="form-group mt-3">
+                <input type="file"
+                       name="profileImage"
+                       class="form-control"
+                       accept="img/*">
+              </div>
+
+              <!-- Submit -->
+              <div class="container text-center mt-4">
+                <button type="submit" class="btn btn-outline-primary">
+                  Save Contact
+                </button>
+              </div>
+
+            </form>
+            <!-- FORM END -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- 1. Load the library (THIS is where your API key goes) -->
+<script src="https://cdn.tiny.cloud/1/92ls3xrl1d8wc0in2qq3i29gclrdbtprij8zvwzx91ejyzyl/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- 2. Initialize the editor (The code you shared) -->
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+  });
+</script>
+ 
+    <!--  92ls3xrl1d8wc0in2qq3i29gclrdbtprij8zvwzx91ejyzyl -->
+ 
+</section>
+</body>
+</html>
